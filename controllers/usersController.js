@@ -1,8 +1,8 @@
-const userModel = require('../models/usersModel')
+const usersModel = require('../models/usersModel')
 
 
 exports.readAll = (req,res) =>{
-    userModel.readAll()
+    usersModel.readAll()
     .then(users =>{
         res.json(users)
     })
@@ -16,7 +16,7 @@ exports.create = (req,res) =>{
     const pseudo = req.body.inputPseudo
     const password = req.body.inputPassword
 
-    userModel.create(pseudo,password)
+    usersModel.create(pseudo,password)
     .then(() =>{
         res.sendStatus(201)
     })
@@ -29,7 +29,7 @@ exports.create = (req,res) =>{
 exports.delete = (req,res) =>{
     const idUser = parseInt(req.params.idUser)
 
-    userModel.delete(idUser)
+    usersModel.delete(idUser)
     .then(() =>{
         res.sendStatus(200)
     })
@@ -41,7 +41,7 @@ exports.delete = (req,res) =>{
 exports.read = (req,res) =>{
     const idUser = parseInt(req.params.idUser)
 
-    userModel.read(idUser)
+    usersModel.read(idUser)
     .then(user =>{
         res.json(user)
     })
@@ -54,9 +54,9 @@ exports.update = (req,res) =>{
     const idUser = parseInt(req.params.idUser)
     const password = req.body.inputPassword
 
-    userModel.update(idUser, password)
-    .then(user =>{
-        res.json(200)
+    usersModel.update(idUser, password)
+    .then(() =>{
+        res.sendStatus(200)
     })
     .catch(err =>{
         res.sendStatus(500)
