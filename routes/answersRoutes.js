@@ -35,3 +35,5 @@ router.get('/:idAnswer/comments', answersController.getAllComments)
 
 //delete a comment to an answer 
 router.delete('/:idAnswer/comments/:idComment', answersController.deleteComment)
+
+module.exports = router;

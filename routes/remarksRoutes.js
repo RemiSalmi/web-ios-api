@@ -25,10 +25,12 @@ router.get('/:idRemark/answers', remarksController.readAllAnswers)
 router.delete('/:idRemark/answers/:idAnswer', remarksController.deleteAnswer)
 
 //Link an existing answer
-router.post('/:idRemark/answers/:idAnswer', remarksController.LinkAnswer)
+router.post('/:idRemark/answers/:idAnswer', remarksController.linkAnswer)
 
 //Say we already encouter a remark 
-router.post('/:idRemark/encouter', remarksController.encouter)
+router.post('/:idRemark/encouter', remarksController.encounter)
 
 //Delete "encouter" a remark 
-router.delete('/:idRemark/encouter', remarksController.deleteEncouter)
+router.delete('/:idRemark/encouter', remarksController.deleteEncounter)
+
+module.exports = router;

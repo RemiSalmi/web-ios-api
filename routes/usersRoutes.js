@@ -23,3 +23,5 @@ router.post('/login', usersController.login)
 
 //Logout
 router.post('/:idUser', usersController.logout)
+
+module.exports = router;

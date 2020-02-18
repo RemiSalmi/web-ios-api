@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const categoryController = require('../controllers/categoryController');
+const categoryController = require('../controllers/categoriesController');
 
 //Get all Categorys
 router.get('/', categoryController.readAll)
@@ -14,3 +14,5 @@ router.get('/remarks', categoryController.readAllRemark)
 
 //Get category by his id
 router.get('/:idCategory', categoryController.read)
+
+module.exports = router;
