@@ -26,3 +26,9 @@ router.delete('/:idRemark/answers/:idAnswer', remarksController.deleteAnswer)
 
 //Link an existing answer
 router.post('/:idRemark/answers/:idAnswer', remarksController.LinkAnswer)
+
+//Say we already encouter a remark 
+router.post('/:idRemark/encouter', remarksController.encouter)
+
+//Delete "encouter" a remark 
+router.delete('/:idRemark/encouter', remarksController.deleteEncouter)
