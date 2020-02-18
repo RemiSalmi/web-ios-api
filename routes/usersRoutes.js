@@ -1,13 +1,17 @@
 const express = require('express');
 const router = express.Router();
 
+//Init bp
+const bodyParser = require('body-parser')
+const urlencodedParser = bodyParser.urlencoded({ extended: false})
+
 const usersController = require('../controllers/usersController');
 
 //Get all users
 router.get('/', usersController.readAll)
 
 //Add an user
-router.post('/', usersController.create)
+router.post('/', urlencodedParser, usersController.create)
 
 //Delete an user by his id
 router.delete('/:idUser', usersController.delete)
@@ -16,12 +20,12 @@ router.delete('/:idUser', usersController.delete)
 router.get('/:idUser', usersController.read)
 
 //Update an user by his id 
-router.put('/:idUser', usersController.update)
+router.put('/:idUser',urlencodedParser, usersController.update)
 
 //Login
-router.post('/login', usersController.login)
+router.post('/login',urlencodedParser, usersController.login)
 
 //Logout
-router.post('/:idUser', usersController.logout)
+router.post('/:idUser',urlencodedParser, usersController.logout)
 
 module.exports = router;
