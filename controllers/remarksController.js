@@ -1,7 +1,7 @@
 const remarksModel = require('../models/remarksModel')
 const answersModel = require('../models/answersModel')
 const encountersModel = require('../models/encountersModel')
-const ListRAsModel = require('../models/ListRAsModel')
+const listRAsModel = require('../models/listRAsModel')
 
 
 
