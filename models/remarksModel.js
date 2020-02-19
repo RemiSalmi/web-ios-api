@@ -66,6 +66,16 @@ module.exports.delete = (idRemark) =>{
 module.exports.update = (idRemark, remark, idCategory) =>{
     return new Promise(function (resolve, reject) {
 
+        if (remark == null){
+            pool.query('UPDATE "Remark" SET "idCategory" = $2 WHERE "idRemark" = $1', [idRemark, idCategory], (err, res) => {
+                if (err) {
+                    reject(err)
+                } else {
+                    resolve(res)
+                }
+            })
+        }else{
+
         if (idCategory == null){
             pool.query('UPDATE "Remark" SET remark = $2 WHERE "idRemark" = $1', [idRemark,remark], (err, res) => {
                 if (err) {
@@ -82,67 +92,7 @@ module.exports.update = (idRemark, remark, idCategory) =>{
                     resolve(res)
                 }
             })
-        }    
+        }
+    }
     })
 }
-
-module.exports.unlinkAnswer = (idRemark,idAnswer) =>{
-    return new Promise(function (resolve, reject) {
-        pool.query('DELETE FROM "ListRA" WHERE "idRemark" = $1 and "idAnswer" = $2', [idRemark,idAnswer], (err, res) => {
-            if (err) {
-                reject(err)
-            } else {
-                resolve(res)
-            }
-        })
-    })
-}
-
-module.exports.linkAnswer = (idRemark,idAnswer) =>{
-    return new Promise(function (resolve, reject) {
-        pool.query('INSERT INTO "ListRA" ("idRemark", "idAnswer") VALUES ($1, $2)', [idRemark,idAnswer], (err, res) => {
-            if (err) {
-                reject(err)
-            } else {
-                resolve(res)
-            }
-        })
-    })
-}
-
-module.exports.encounter = (idRemark,idUser) =>{
-    return new Promise(function (resolve, reject) {
-        pool.query('INSERT INTO "Encounter" ("idRemark", "idUser") VALUES ($1, $2)', [idRemark,idUser], (err, res) => {
-            if (err) {
-                reject(err)
-            } else {
-                resolve(res)
-            }
-        })
-    })
-}
-
-module.exports.deleteEncounter = (idRemark,idUser) =>{
-    return new Promise(function (resolve, reject) {
-        pool.query('DELETE FROM "Encounter" WHERE "idRemark" = $1 and "idUser" = $2', [idRemark,idUser], (err, res) => {
-            if (err) {
-                reject(err)
-            } else {
-                resolve(res)
-            }
-        })
-    })
-}
-
-module.exports.getNbEncounter = (idRemark) =>{
-    return new Promise(function (resolve, reject) {
-        pool.query('SELECT count(*) FROM "Encounter" WHERE "idRemark" = $1', [idRemark], (err, res) => {
-            if (err) {
-                reject(err)
-            } else {
-                resolve(res.rows[0])
-            }
-        })
-    })
-}
-
