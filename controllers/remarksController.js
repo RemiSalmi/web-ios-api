@@ -1,5 +1,7 @@
 const remarksModel = require('../models/remarksModel')
 const answersModel = require('../models/answersModel')
+const encountersModel = require('../models/encountersModel')
+const ListRAsModel = require('../models/ListRAsModel')
 
 
 
@@ -87,7 +89,7 @@ exports.unlinkAnswer = (req,res) =>{
     const idRemark = parseInt(req.params.idRemark)
     const idAnswer = parseInt(req.params.idAnswer)
 
-    remarksModel.unlinkAnswer(idRemark,idAnswer)
+    ListRAsModel.unlinkAnswer(idRemark,idAnswer)
     .then(()=>{
         res.sendStatus(200)
     })
@@ -102,7 +104,7 @@ exports.linkAnswer = (req,res) =>{
     const idRemark = parseInt(req.params.idRemark)
     const idAnswer = parseInt(req.params.idAnswer)
 
-    remarksModel.linkAnswer(idRemark,idAnswer)
+    ListRAsModel.linkAnswer(idRemark,idAnswer)
     .then(()=>{
         res.sendStatus(200)
     })
@@ -116,7 +118,7 @@ exports.encounter = (req,res) =>{
     const idRemark = parseInt(req.params.idRemark)
     const idUser = 1 //Should be replace with auth system
 
-    remarksModel.encounter(idRemark,idUser)
+    encountersModel.encounter(idRemark,idUser)
     .then(()=>{
         res.sendStatus(200)
     })
@@ -129,13 +131,12 @@ exports.encounter = (req,res) =>{
 exports.deleteEncounter = (req,res) =>{
     const idRemark = parseInt(req.params.idRemark)
     const idUser = 1 //Should be replace with auth system
-
-    remarksModel.deleteEncounter(idRemark,idUser)
+    
+    encountersModel.deleteEncounter(idRemark,idUser)
     .then(()=>{
         res.sendStatus(200)
     })
     .catch(err => {
-        console.log(err)
         res.sendStatus(401)
     })
 }
@@ -144,7 +145,7 @@ exports.getNbEncounter = (req,res) =>{
     const idRemark = parseInt(req.params.idRemark)
 
     
-    remarksModel.getNbEncounter(idRemark)
+    encountersModel.getNbEncounter(idRemark)
     .then(nbEncounter=>{
         res.json(nbEncounter)
     })

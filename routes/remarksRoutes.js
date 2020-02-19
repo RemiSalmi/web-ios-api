@@ -32,10 +32,10 @@ router.delete('/:idRemark/answers/:idAnswer', remarksController.unlinkAnswer)
 router.post('/:idRemark/answers/:idAnswer', urlencodedParser, remarksController.linkAnswer)
 
 //Say we already encouter a remark 
-router.post('/:idRemark/encouter', urlencodedParser, remarksController.encounter)
+router.post('/:idRemark/encounter', urlencodedParser, remarksController.encounter)
 
 //Delete "encouter" a remark 
-router.delete('/:idRemark/encouter', remarksController.deleteEncounter)
+router.delete('/:idRemark/encounter', remarksController.deleteEncounter)
 
 //Get encounter nb for a remark 
 router.get('/:idRemark/encounter', remarksController.getNbEncounter)
