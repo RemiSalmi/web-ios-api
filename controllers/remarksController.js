@@ -89,7 +89,7 @@ exports.unlinkAnswer = (req,res) =>{
     const idRemark = parseInt(req.params.idRemark)
     const idAnswer = parseInt(req.params.idAnswer)
 
-    ListRAsModel.unlinkAnswer(idRemark,idAnswer)
+    listRAsModel.unlinkAnswer(idRemark,idAnswer)
     .then(()=>{
         res.sendStatus(200)
     })
@@ -104,7 +104,7 @@ exports.linkAnswer = (req,res) =>{
     const idRemark = parseInt(req.params.idRemark)
     const idAnswer = parseInt(req.params.idAnswer)
 
-    ListRAsModel.linkAnswer(idRemark,idAnswer)
+    listRAsModel.linkAnswer(idRemark,idAnswer)
     .then(()=>{
         res.sendStatus(200)
     })
