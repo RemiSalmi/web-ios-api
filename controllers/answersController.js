@@ -9,11 +9,11 @@ const secret = require('../config/security')
 exports.readAll = (req,res) =>{
     answersModel.readAll()
     .then(answers =>{
-        res.json(answers)
+        res.status(200).json({"message":"Success","data" : answers})
     })
     .catch(err => {
         console.log(err)
-        res.sendStatus(401)
+        res.status(400).json({"message" : "Error, not able to retrieve answers from the database"})
     })
 }
 
@@ -24,11 +24,11 @@ exports.create = (req,res) =>{
 
     answersModel.create(answer, idCategory, idUser)
     .then(()=>{
-        res.sendStatus(201)
+        res.status(201).json({"message":"Success"})
     })
     .catch(err => {
         console.log(err)
-        res.sendStatus(401)
+        res.status(400).json({"message" : "Error, not able to create an answer in the database"})
     })
 }
 
@@ -37,11 +37,11 @@ exports.read = (req,res) =>{
 
     answersModel.read(idAnswer)
     .then(answer=>{
-        res.json(answer)
+        res.status(200).json({"message":"Success","data" : answer})
     })
     .catch(err => {
         console.log(err)
-        res.sendStatus(401)
+        res.status(400).json({"message" : "Error, not able to retrieve the answer from the database"})
     })
 }
 
@@ -50,11 +50,11 @@ exports.delete = (req,res) =>{
 
     answersModel.delete(idAnswer)
     .then(() =>{
-        res.sendStatus(200)
+        res.status(200).json({"message":"Success"})
     })
     .catch(err =>{
         console.log(err)
-        res.sendStatus(500)
+        res.status(400).json({"message" : "Error, not able to delete the answer in the database"})
     })
 }
 
@@ -65,11 +65,11 @@ exports.update = (req,res) =>{
 
     answersModel.update(idAnswer, answer, idCategory)
     .then(() =>{
-        res.sendStatus(200)
+        res.status(200).json({"message":"Success"})
     })
     .catch(err =>{
         console.log(err)
-        res.sendStatus(500)
+        res.status(400).json({"message" : "Error, not able to update the answer in the database"})
     })
 }
 
@@ -79,11 +79,11 @@ exports.getNbLikes = (req,res) =>{
     
     likesModel.getNbLikes(idAnswer)
     .then(nbLike=>{
-        res.json(nbLike)
+        res.status(200).json({"message":"Success","data" : nbLike})
     })
     .catch(err => {
         console.log(err)
-        res.sendStatus(401)
+        res.status(400).json({"message" : "Error, not able to retrieve data from the database"})
     })
     
 }
@@ -94,11 +94,11 @@ exports.addLike = (req,res) =>{
 
     likesModel.addLike(idAnswer,idUser)
     .then(()=>{
-        res.sendStatus(200)
+        res.status(201).json({"message":"Success"})
     })
     .catch(err => {
         console.log(err)
-        res.sendStatus(401)
+        res.status(400).json({"message" : "Error, not able to add a like in the database"})
     })
 }
 
@@ -108,11 +108,11 @@ exports.deleteLike = (req,res) =>{
 
     likesModel.deleteLike(idAnswer,idUser)
     .then(()=>{
-        res.sendStatus(200)
+        res.status(200).json({"message":"Success"})
     })
     .catch(err => {
         console.log(err)
-        res.sendStatus(401)
+        res.status(400).json({"message" : "Error, not able to delete a like in the database"})
     })
 }
 
@@ -123,11 +123,11 @@ exports.addComment = (req,res) =>{
 
     commentsModel.addComment(idAnswer,comment,idUser)
     .then(()=>{
-        res.sendStatus(200)
+        res.status(201).json({"message":"Success"})
     })
     .catch(err => {
         console.log(err)
-        res.sendStatus(401)
+        res.status(400).json({"message" : "Error, not able to add a comment in the database"})
     })
 }
 
@@ -136,11 +136,11 @@ exports.getAllCommentsByAnswer = (req,res) =>{
 
     commentsModel.getAllCommentsByAnswer(idAnswer)
     .then(comments=>{
-        res.json(comments)
+        res.status(200).json({"message":"Success","data" : comments})
     })
     .catch(err => {
         console.log(err)
-        res.sendStatus(401)
+        res.status(400).json({"message" : "Error, not able to retrieve comments from the database"})
     })
 }
 
@@ -149,10 +149,10 @@ exports.deleteComment = (req,res) =>{
 
     commentsModel.deleteComment(idComment)
     .then(()=>{
-        res.sendStatus(200)
+        res.status(200).json({"message":"Success"})
     })
     .catch(err => {
         console.log(err)
-        res.sendStatus(401)
+        res.status(400).json({"message" : "Error, not able to delete a comment in the database"})
     })
 }
