@@ -2,6 +2,10 @@ const answersModel = require('../models/answersModel')
 const commentsModel = require('../models/commentsModel')
 const likesModel = require('../models/likesModel')
 
+//Init jwt
+var jwt = require('jsonwebtoken');
+const secret = require('../config/security')
+
 exports.readAll = (req,res) =>{
     answersModel.readAll()
     .then(answers =>{
@@ -16,7 +20,7 @@ exports.readAll = (req,res) =>{
 exports.create = (req,res) =>{
     const answer = req.body.answer
     const idCategory = req.body.idCategory
-    const idUser = 24 //Should be replace with Auth system values
+    const idUser = jwt.decode(req.body.token).idUser
 
     answersModel.create(answer, idCategory, idUser)
     .then(()=>{
@@ -86,7 +90,7 @@ exports.getNbLikes = (req,res) =>{
 
 exports.addLike = (req,res) =>{
     const idAnswer = parseInt(req.params.idAnswer)
-    const idUser = 1 //Should be replace with auth system
+    const idUser = jwt.decode(req.body.token).idUser
 
     likesModel.addLike(idAnswer,idUser)
     .then(()=>{
@@ -100,7 +104,7 @@ exports.addLike = (req,res) =>{
 
 exports.deleteLike = (req,res) =>{
     const idAnswer = parseInt(req.params.idAnswer)
-    const idUser = 1 //Should be replace with auth system
+    const idUser = jwt.decode(req.body.token).idUser
 
     likesModel.deleteLike(idAnswer,idUser)
     .then(()=>{
@@ -115,7 +119,7 @@ exports.deleteLike = (req,res) =>{
 exports.addComment = (req,res) =>{
     const idAnswer = parseInt(req.params.idAnswer)
     const comment = req.body.comment 
-    const idUser = 1 //Should be replace with auth system
+    const idUser = jwt.decode(req.body.token).idUser
 
     commentsModel.addComment(idAnswer,comment,idUser)
     .then(()=>{

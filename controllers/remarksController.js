@@ -3,7 +3,9 @@ const answersModel = require('../models/answersModel')
 const encountersModel = require('../models/encountersModel')
 const listRAsModel = require('../models/listRAsModel')
 
-
+//Init jwt
+var jwt = require('jsonwebtoken');
+const secret = require('../config/security')
 
 exports.readAll = (req,res) =>{
     remarksModel.readAll()
@@ -19,7 +21,7 @@ exports.readAll = (req,res) =>{
 exports.create = (req,res) =>{
     const remark = req.body.remark
     const idCategory = req.body.idCategory
-    const idUser = 24 //Should be replace with Auth system values
+    const idUser = jwt.decode(req.body.token).idUser
 
     remarksModel.create(remark, idCategory, idUser)
     .then(()=>{
@@ -116,7 +118,7 @@ exports.linkAnswer = (req,res) =>{
 
 exports.encounter = (req,res) =>{
     const idRemark = parseInt(req.params.idRemark)
-    const idUser = 1 //Should be replace with auth system
+    const idUser = jwt.decode(req.body.token).idUser
 
     encountersModel.encounter(idRemark,idUser)
     .then(()=>{
@@ -130,7 +132,7 @@ exports.encounter = (req,res) =>{
 
 exports.deleteEncounter = (req,res) =>{
     const idRemark = parseInt(req.params.idRemark)
-    const idUser = 1 //Should be replace with auth system
+    const idUser = jwt.decode(req.body.token).idUser
     
     encountersModel.deleteEncounter(idRemark,idUser)
     .then(()=>{
