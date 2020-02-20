@@ -2,7 +2,7 @@ const usersModel = require('../models/usersModel')
 
 //Init jwt
 var jwt = require('jsonwebtoken');
-const secret = require('../Config/security')
+const secret = require('../config/security')
 
 //Init bcrypt
 const bcrypt = require('bcrypt');
