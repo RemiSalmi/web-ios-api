@@ -10,11 +10,11 @@ const bcrypt = require('bcrypt');
 exports.readAll = (req,res) =>{
     usersModel.readAll()
     .then(users =>{
-        res.json(users)
+        res.status(200).json({"message":"Success","data" : users})
     })
     .catch(err => {
         console.log(err)
-        res.sendStatus(401)
+        res.status(400).json({"message" : "Error, not able to retrieve users from the database"})
     })
 }
 
@@ -26,10 +26,10 @@ exports.create = (req,res) =>{
 
     usersModel.create(pseudo,encryptedPass)
     .then(() =>{
-        res.sendStatus(201)
+        res.status(201).json({"message":"Success"})
     })
     .catch(err =>{
-        res.sendStatus(500)
+        res.status(400).json({"message" : "Error, not able to create an user in the database"})
     })
     
 }
@@ -39,10 +39,10 @@ exports.delete = (req,res) =>{
 
     usersModel.delete(idUser)
     .then(() =>{
-        res.sendStatus(200)
+        res.status(200).json({"message":"Success"})
     })
     .catch(err =>{
-        res.sendStatus(500)
+        res.status(400).json({"message" : "Error, not able to delete the user in the database"})
     })
 }
 
@@ -51,10 +51,10 @@ exports.read = (req,res) =>{
 
     usersModel.read(idUser)
     .then(user =>{
-        res.json(user)
+        res.status(200).json({"message":"Success","data" : user})
     })
     .catch(err =>{
-        res.sendStatus(500)
+        res.status(400).json({"message" : "Error, not able to retrieve the user from the database"})
     })
 }
 
@@ -64,10 +64,10 @@ exports.update = (req,res) =>{
 
     usersModel.update(idUser, password)
     .then(() =>{
-        res.sendStatus(200)
+        res.status(200).json({"message":"Success"})
     })
     .catch(err =>{
-        res.sendStatus(500)
+        res.status(400).json({"message" : "Error, not able to update the user in the database"})
     })
 
 }
@@ -82,18 +82,18 @@ exports.login = (req,res) =>{
         if(reqRes.rowCount > 0 ){
             if(bcrypt.compareSync(password, reqRes.rows[0].password)){
                 let token = jwt.sign({ idUser: reqRes.rows[0].idUser, role: reqRes.rows[0].role }, secret)
-                res.json({token : token})
+                res.status(200).json({"message":"Success","data" : {"token": token}})
             }else{
-                res.sendStatus(401)
+                res.status(401).json({"message" : "Error, bad password"})
             }
             
         }else{
-            res.sendStatus(401)
+            res.status(401).json({"message" : "Error, bad user"})
         }
         
     })
     .catch(err =>{
-        res.sendStatus(401)
+        res.status(400).json({"message" : "Error, not able to retrieve data from the database"})
     })
 }
 
