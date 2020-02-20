@@ -19,8 +19,8 @@ exports.readAll = (req,res) =>{
 }
 
 exports.create = (req,res) =>{
-    const pseudo = req.body.inputPseudo
-    const password = req.body.inputPassword
+    const pseudo = req.body.pseudo
+    const password = req.body.password
 
     const encryptedPass = bcrypt.hashSync(password, 10)
 
@@ -60,7 +60,7 @@ exports.read = (req,res) =>{
 
 exports.update = (req,res) =>{
     const idUser = parseInt(req.params.idUser)
-    const password = req.body.inputPassword
+    const password = req.body.password
 
     usersModel.update(idUser, password)
     .then(() =>{
@@ -73,8 +73,8 @@ exports.update = (req,res) =>{
 }
 
 exports.login = (req,res) =>{
-    const pseudo = req.body.inputPseudo
-    const password = req.body.inputPassword
+    const pseudo = req.body.pseudo
+    const password = req.body.password
     
     usersModel.getUserByPseudo(pseudo)
     .then(reqRes =>{
