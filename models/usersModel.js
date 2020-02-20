@@ -78,10 +78,14 @@ module.exports.update = (idUser,password) =>{
     })
 }
 
-module.exports.login = () =>{
-    
-}
-
-module.exports.logout = () =>{
-    
+module.exports.getUserByPseudo = (pseudo) =>{
+    return new Promise(function (resolve, reject) {
+        pool.query('SELECT * FROM "User" WHERE "pseudo" = $1', [pseudo], (err, res) => {
+            if (err) {
+                reject(err)
+            } else {
+                resolve(res)
+            }
+        })
+    })
 }

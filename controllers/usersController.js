@@ -1,5 +1,11 @@
 const usersModel = require('../models/usersModel')
 
+//Init jwt
+var jwt = require('jsonwebtoken');
+const secret = require('../Config/security')
+
+//Init bcrypt
+const bcrypt = require('bcrypt');
 
 exports.readAll = (req,res) =>{
     usersModel.readAll()
@@ -16,7 +22,9 @@ exports.create = (req,res) =>{
     const pseudo = req.body.inputPseudo
     const password = req.body.inputPassword
 
-    usersModel.create(pseudo,password)
+    const encryptedPass = bcrypt.hashSync(password, 10)
+
+    usersModel.create(pseudo,encryptedPass)
     .then(() =>{
         res.sendStatus(201)
     })
@@ -65,9 +73,30 @@ exports.update = (req,res) =>{
 }
 
 exports.login = (req,res) =>{
+    const pseudo = req.body.inputPseudo
+    const password = req.body.inputPassword
     
+    usersModel.getUserByPseudo(pseudo)
+    .then(reqRes =>{
+
+        if(reqRes.rowCount > 0 ){
+            if(bcrypt.compareSync(password, reqRes.rows[0].password)){
+                let token = jwt.sign({ idUser: reqRes.rows[0].idUser, role: reqRes.rows[0].role }, secret)
+                res.json({token : token})
+            }else{
+                res.sendStatus(401)
+            }
+            
+        }else{
+            res.sendStatus(401)
+        }
+        
+    })
+    .catch(err =>{
+        res.sendStatus(401)
+    })
 }
 
 exports.logout = (req,res) =>{
-    
+
 }
