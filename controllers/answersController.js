@@ -14,8 +14,8 @@ exports.readAll = (req,res) =>{
 }
 
 exports.create = (req,res) =>{
-    const answer = req.body.inputAnswer
-    const idCategory = req.body.inputIdCategory
+    const answer = req.body.answer
+    const idCategory = req.body.idCategory
     const idUser = 24 //Should be replace with Auth system values
 
     answersModel.create(answer, idCategory, idUser)
@@ -56,8 +56,8 @@ exports.delete = (req,res) =>{
 
 exports.update = (req,res) =>{
     const idAnswer = parseInt(req.params.idAnswer)
-    const answer = req.body.inputAnswer
-    const idCategory = req.body.inputIdCategory
+    const answer = req.body.answer
+    const idCategory = req.body.idCategory
 
     answersModel.update(idAnswer, answer, idCategory)
     .then(() =>{
@@ -114,7 +114,7 @@ exports.deleteLike = (req,res) =>{
 
 exports.addComment = (req,res) =>{
     const idAnswer = parseInt(req.params.idAnswer)
-    const comment = req.body.inputComment 
+    const comment = req.body.comment 
     const idUser = 1 //Should be replace with auth system
 
     commentsModel.addComment(idAnswer,comment,idUser)

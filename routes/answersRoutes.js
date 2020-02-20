@@ -3,7 +3,7 @@ const router = express.Router();
 
 //Init bp
 const bodyParser = require('body-parser')
-const urlencodedParser = bodyParser.urlencoded({ extended: false})
+const jsonParser = bodyParser.json()
 
 const answersController = require('../controllers/answersController');
 
@@ -11,7 +11,7 @@ const answersController = require('../controllers/answersController');
 router.get('/', answersController.readAll)
 
 //Create an answer
-router.post('/', urlencodedParser, answersController.create)
+router.post('/', jsonParser, answersController.create)
 
 //Get an answer by his id 
 router.get('/:idAnswer', answersController.read)
@@ -20,19 +20,19 @@ router.get('/:idAnswer', answersController.read)
 router.delete('/:idAnswer', answersController.delete)
 
 //Update an answer by his id 
-router.put('/:idAnswer', urlencodedParser, answersController.update)
+router.put('/:idAnswer', jsonParser, answersController.update)
 
 //Get answer's like number  
 router.get('/:idAnswer/likes', answersController.getNbLikes)
 
 //Add a like to an answer 
-router.post('/:idAnswer/likes', urlencodedParser, answersController.addLike)
+router.post('/:idAnswer/likes', jsonParser, answersController.addLike)
 
 //delete a like to an answer 
 router.delete('/:idAnswer/likes', answersController.deleteLike)
 
 //Add a comment to an answer 
-router.post('/:idAnswer/comments', urlencodedParser, answersController.addComment)
+router.post('/:idAnswer/comments', jsonParser, answersController.addComment)
 
 //Get answer's comments  
 router.get('/:idAnswer/comments', answersController.getAllCommentsByAnswer)
