@@ -1,6 +1,6 @@
 //Init jwt
 const jwt = require('jsonwebtoken')
-const secret = require('../Config/security')
+const secret = require('../config/security')
 
 exports.isConnected = (req, res, next) => {
     if (req.body.token) {
