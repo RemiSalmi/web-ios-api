@@ -3,7 +3,7 @@ const router = express.Router();
 
 //Init bp
 const bodyParser = require('body-parser')
-const urlencodedParser = bodyParser.urlencoded({ extended: false})
+const jsonParser = bodyParser.json()
 
 const remarksController = require('../controllers/remarksController');
 
@@ -11,7 +11,7 @@ const remarksController = require('../controllers/remarksController');
 router.get('/', remarksController.readAll)
 
 //Add a remark
-router.post('/', urlencodedParser, remarksController.create)
+router.post('/', jsonParser, remarksController.create)
 
 //Get a remark by his id
 router.get('/:idRemark', remarksController.read)
@@ -20,7 +20,7 @@ router.get('/:idRemark', remarksController.read)
 router.delete('/:idRemark', remarksController.delete)
 
 //update a remark by his id
-router.put('/:idRemark', urlencodedParser, remarksController.update)
+router.put('/:idRemark', jsonParser, remarksController.update)
 
 //Get remark's answers
 router.get('/:idRemark/answers', remarksController.readAllAnswers)
@@ -29,10 +29,10 @@ router.get('/:idRemark/answers', remarksController.readAllAnswers)
 router.delete('/:idRemark/answers/:idAnswer', remarksController.unlinkAnswer)
 
 //Link an existing answer
-router.post('/:idRemark/answers/:idAnswer', urlencodedParser, remarksController.linkAnswer)
+router.post('/:idRemark/answers/:idAnswer', jsonParser, remarksController.linkAnswer)
 
 //Say we already encouter a remark 
-router.post('/:idRemark/encounter', urlencodedParser, remarksController.encounter)
+router.post('/:idRemark/encounter', jsonParser, remarksController.encounter)
 
 //Delete "encouter" a remark 
 router.delete('/:idRemark/encounter', remarksController.deleteEncounter)

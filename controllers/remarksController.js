@@ -17,8 +17,8 @@ exports.readAll = (req,res) =>{
 }
 
 exports.create = (req,res) =>{
-    const remark = req.body.inputRemark
-    const idCategory = req.body.inputIdCategory
+    const remark = req.body.remark
+    const idCategory = req.body.idCategory
     const idUser = 24 //Should be replace with Auth system values
 
     remarksModel.create(remark, idCategory, idUser)
@@ -58,8 +58,8 @@ exports.delete = (req,res) =>{
 
 exports.update = (req,res) =>{
     const idRemark = parseInt(req.params.idRemark)
-    const remark = req.body.inputRemark
-    const idCategory = req.body.inputIdCategory
+    const remark = req.body.remark
+    const idCategory = req.body.idCategory
 
     remarksModel.update(idRemark, remark, idCategory)
     .then(() =>{
