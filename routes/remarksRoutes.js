@@ -16,13 +16,13 @@ router.get('/', remarksController.readAll)
 //Add a remark
 router.post('/', jsonParser,auth.isConnected, remarksController.create)
 
-//Get a remark by his id
+//Get a remark by id
 router.get('/:idRemark', remarksController.read)
 
-//delete a remark by his id
+//delete a remark by id
 router.delete('/:idRemark',jsonParser, auth.isConnected, remarksController.delete)
 
-//update a remark by his id
+//update a remark by id
 router.put('/:idRemark', jsonParser,auth.isConnected, remarksController.update)
 
 //Get remark's answers

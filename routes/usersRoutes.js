@@ -28,7 +28,4 @@ router.put('/:idUser',jsonParser,auth.isConnected, usersController.update)
 //Login
 router.post('/login',jsonParser, usersController.login)
 
-//Logout
-router.post('/:idUser',jsonParser, usersController.logout)
-
 module.exports = router;
