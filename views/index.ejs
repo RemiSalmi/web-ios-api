@@ -12,7 +12,15 @@
     <title>web-ios-api</title>
 </head>
 <body>
+
+
+
     <div class="container-fluid">
+
+      
+          <h1 class="text-center">WEB-IOS-API</h1>
+          <div class="blockquote-footer text-center">Paola Andreu - Rémi Salmi - Guillaume Tessier</div>
+
         <div class="card card-nav-tabs mrt">
             <div class="card-header card-header-primary">
               <!-- colors: "header-primary", "header-info", "header-success", "header-warning", "header-danger" -->
@@ -21,12 +29,12 @@
                   <ul class="nav nav-tabs" data-tabs="tabs">
                     <li class="nav-item">
                       <a class="nav-link active" href="#users" data-toggle="tab">
-                        <i class="material-icons">face</i> Users
+                        <i class="material-icons">person</i> Users
                       </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#remarks" data-toggle="tab">
-                          <i class="material-icons">build</i> Remarks
+                          <i class="material-icons">hearing</i> Remarks
                         </a>
                       </li>
                     <li class="nav-item">
@@ -36,7 +44,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#categories" data-toggle="tab">
-                          <i class="material-icons">face</i> Categories
+                          <i class="material-icons">view_carousel</i> Categories
                         </a>
                     </li>
                   </ul>
@@ -64,7 +72,8 @@
                                 "badge badge-pill badge-danger"
                             <% } %>
                             '>
-                            <%= route.type %></span> <%= route.route %>
+                            <%= route.type %></span>
+                            <%= route.route %>
                         </div>
                         <div class="card-body">
                           <blockquote class="blockquote mb-0">
