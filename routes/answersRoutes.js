@@ -16,13 +16,13 @@ router.get('/', answersController.readAll)
 //Create an answer
 router.post('/', jsonParser,auth.isConnected, answersController.create)
 
-//Get an answer by his id 
+//Get an answer by id 
 router.get('/:idAnswer', answersController.read)
 
-//delete an answer by his id 
+//delete an answer by id 
 router.delete('/:idAnswer',jsonParser,auth.isConnected, answersController.delete)
 
-//Update an answer by his id 
+//Update an answer by id 
 router.put('/:idAnswer', jsonParser,auth.isConnected, answersController.update)
 
 //Get answer's like number  
