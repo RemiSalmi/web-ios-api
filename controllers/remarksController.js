@@ -157,3 +157,16 @@ exports.getNbEncounter = (req,res) =>{
     })
 }
 
+exports.getRemarksByUser = (req,res) =>{
+    const idUser = parseInt(req.params.idUser)
+
+    remarksModel.getRemarksByUser(idUser)
+    .then(remarks=>{
+        res.status(200).json({"message":"Success","data" : remarks})
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(400).json({"message" : "Error, not able to retrieve remarks from the database"})
+    })
+    
+}

@@ -63,6 +63,20 @@ module.exports.delete = (idRemark) =>{
     })
 }
 
+module.exports.getRemarksByUser = (idUser) =>{
+
+    return new Promise(function (resolve, reject) {
+        pool.query('SELECT * FROM "Remark" WHERE "idUser" = $1', [idUser], (err, res) => {
+            if (err) {
+                reject(err)
+            } else {
+                let remarks = res.rows.map(remark => new Remark(remark.idRemark,remark.remark,remark.idCategory,remark.idUser))
+                resolve(remarks)
+            }
+        })
+    })
+}
+
 module.exports.update = (idRemark, remark, idCategory) =>{
     return new Promise(function (resolve, reject) {
 

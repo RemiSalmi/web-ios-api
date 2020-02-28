@@ -43,4 +43,7 @@ router.delete('/:idRemark/encounter',jsonParser, auth.isConnected, remarksContro
 //Get encounter nb for a remark 
 router.get('/:idRemark/encounter', remarksController.getNbEncounter)
 
+//Get all users's remarks 
+router.get('/users/:idUser', remarksController.getRemarksByUser)
+
 module.exports = router;

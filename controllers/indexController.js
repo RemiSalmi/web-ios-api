@@ -398,6 +398,43 @@ exports.index = (req,res) =>{
         },
 
         {
+            "route" : "https://web-ios-api.herokuapp.com/remarks/users/:idUser",
+            "type" : "get",
+            "desc" : "Get all remarks by User",
+            "param" :
+            [
+             {
+                 "paramName": "idUser",
+                 "ParamDesc" : "User's id"
+             }   
+            ],
+            
+            "output" :
+            {
+                "message" : "Success | Error",
+                "data" : 
+                [
+                    {
+                        "outputName" : "idRemark",
+                        "outputDesc" : "Remark's id"
+                    },
+                    {
+                        "outputName" : "remark",
+                        "outputDesc" : "The remark"
+                    },
+                    {
+                        "outputName" : "idCategory",
+                        "outputDesc" : "Remark's category"
+                    },
+                    {
+                        "outputName" : "idUser",
+                        "outputDesc" : "Remark's creator"
+                    }
+                ]
+            }
+        },
+
+        {
             "route" : "https://web-ios-api.herokuapp.com/remarks/:idRemark/encouter",
             "type" : "get",
             "desc" : "Get the number of encounter of a remark",
