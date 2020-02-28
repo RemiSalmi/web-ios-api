@@ -437,21 +437,13 @@ exports.index = (req,res) =>{
         {
             "route" : "https://web-ios-api.herokuapp.com/remarks/:idRemark/encounter",
             "type" : "get",
-            "desc" : "Get the number of encounter of a remark",
+            "desc" : "Get the number of encounter by remark",
             "param" :
             [
              {
                  "paramName": "idRemark",
                  "ParamDesc" : "Remark's id"
              }   
-            ],
-            "input" : 
-            [
-                {
-                    "inputName" : "token",
-                    "inputDesc" : "your auth token"
-                },
-                
             ],
             "output" :
             {
