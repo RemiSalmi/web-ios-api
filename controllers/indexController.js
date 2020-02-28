@@ -435,7 +435,7 @@ exports.index = (req,res) =>{
         },
 
         {
-            "route" : "https://web-ios-api.herokuapp.com/remarks/:idRemark/encouter",
+            "route" : "https://web-ios-api.herokuapp.com/remarks/:idRemark/encounter",
             "type" : "get",
             "desc" : "Get the number of encounter of a remark",
             "param" :
