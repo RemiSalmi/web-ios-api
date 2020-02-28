@@ -1,10 +1,9 @@
 const pool = require('../config/database')
 
 class User {
-    constructor(idUser, pseudo, password, role) {
+    constructor(idUser, pseudo, role) {
         this.idUser = idUser;
         this.pseudo = pseudo
-        this.password = password
         this.role = role
     }
 }
@@ -17,7 +16,7 @@ module.exports.readAll = () => {
             if (err) {
                 reject(err)
             } else {
-                let users = res.rows.map(user => new User(user.idUser,user.pseudo,user.password,user.role))
+                let users = res.rows.map(user => new User(user.idUser,user.pseudo,user.role))
                 resolve(users)
 
             }
@@ -58,7 +57,7 @@ module.exports.read = (idUser) =>{
             if (err) {
                 reject(err)
             } else {
-                let user = res.rows.map(user => new User(user.idUser,user.pseudo,user.password,user.role))
+                let user = res.rows.map(user => new User(user.idUser,user.pseudo,user.role))
                 resolve(user)
             }
         })
@@ -71,7 +70,7 @@ module.exports.update = (idUser,password) =>{
             if (err) {
                 reject(err)
             } else {
-                let user = res.rows.map(user => new User(user.idUser,user.pseudo,user.password,user.role))
+                let user = res.rows.map(user => new User(user.idUser,user.pseudo,user.role))
                 resolve(user)
             }
         })

@@ -21,10 +21,6 @@ exports.index = (req,res) =>{
                     "outputDesc" : "user's pseudo"
                 },
                 {
-                    "outputName": "password",
-                    "outputDesc" : "user's password"
-                },
-                {
                     "outputName": "role",
                     "outputDesc" : "user's role"
                 }
@@ -58,10 +54,6 @@ exports.index = (req,res) =>{
                 {
                     "outputName": "pseudo",
                     "outputDesc" : "user's pseudo"
-                },
-                {
-                    "outputName": "password",
-                    "outputDesc" : "user's password"
                 },
                 {
                     "outputName": "role",
