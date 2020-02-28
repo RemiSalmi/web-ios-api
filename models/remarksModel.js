@@ -1,11 +1,13 @@
 const pool = require('../config/database')
 
 class Remark {
-    constructor(idRemark, remark, idCategory, idUser) {
+    constructor(idRemark, remark, idCategory, idUser,location,dateCreation) {
         this.idRemark = idRemark;
         this.remark = remark
         this.idCategory = idCategory
         this.idUser = idUser
+        this.location = location,
+        this.dateCreation = dateCreation
     }
 }
 
@@ -18,7 +20,9 @@ module.exports.readAll = (req,res) =>{
             if (err) {
                 reject(err)
             } else {
-                let remarks = res.rows.map(remark => new Remark(remark.idRemark,remark.remark,remark.idCategory,remark.idUser))
+                let remarks = res.rows.map(remark => new Remark(remark.idRemark,remark.remark,remark.idCategory,remark.idUser,remark.location,remark.dateCreation))
+                let testDate = new Date(res.rows[5].dateCreation)
+                console.log(testDate.getFullYear())
                 resolve(remarks)
 
             }
@@ -26,9 +30,9 @@ module.exports.readAll = (req,res) =>{
     })
 }
 
-module.exports.create = (remark,idCategory,idUser) =>{
+module.exports.create = (remark,idCategory,idUser,location) =>{
     return new Promise(function (resolve, reject) {
-        pool.query('INSERT INTO "Remark" ("remark","idCategory","idUser") VALUES ($1, $2, $3);', [remark,idCategory,idUser], (err, res) => {
+        pool.query('INSERT INTO "Remark" ("remark","idCategory","idUser","location","dateCreation") VALUES ($1, $2, $3, $4, $5);', [remark,idCategory,idUser,location,new Date()], (err, res) => {
             if (err) {
                 reject(err)
             } else {
@@ -44,7 +48,7 @@ module.exports.read = (idRemark) =>{
             if (err) {
                 reject(err)
             } else {
-                let remark = res.rows.map(remark => new Remark(remark.idRemark,remark.remark,remark.idCategory,remark.idUser))
+                let remark = res.rows.map(remark => new Remark(remark.idRemark,remark.remark,remark.idCategory,remark.idUser,remark.location,remark.dateCreation))
                 resolve(remark)
             }
         })
@@ -70,7 +74,7 @@ module.exports.getRemarksByUser = (idUser) =>{
             if (err) {
                 reject(err)
             } else {
-                let remarks = res.rows.map(remark => new Remark(remark.idRemark,remark.remark,remark.idCategory,remark.idUser))
+                let remarks = res.rows.map(remark => new Remark(remark.idRemark,remark.remark,remark.idCategory,remark.idUser,remark.location,remark.dateCreation))
                 resolve(remarks)
             }
         })

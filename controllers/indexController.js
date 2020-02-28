@@ -310,13 +310,21 @@ exports.index = (req,res) =>{
                     {
                         "outputName" : "idUser",
                         "outputDesc" : "Remark's creator"
+                    },
+                    {
+                        "outputName" : "location",
+                        "outputDesc" : "Where we encounter the remark"
+                    },
+                    {
+                        "outputName" : "dateCreation",
+                        "outputDesc" : "When we encounter the remark"
                     }
                 ]
             }
         },
 
         {
-            "route" : "https://web-ios-api.herokuapp.com/answers/:idRemark",
+            "route" : "https://web-ios-api.herokuapp.com/remarks/:idRemark",
             "type" : "get",
             "desc" : "Get a remark by his id",
             "param" :
@@ -347,6 +355,14 @@ exports.index = (req,res) =>{
                     {
                         "outputName" : "idUser",
                         "outputDesc" : "Remark's creator"
+                    },
+                    {
+                        "outputName" : "location",
+                        "outputDesc" : "Where we encounter the remark"
+                    },
+                    {
+                        "outputName" : "dateCreation",
+                        "outputDesc" : "When we encounter the remark"
                     }
                 ]
             }
@@ -421,6 +437,14 @@ exports.index = (req,res) =>{
                     {
                         "outputName" : "idUser",
                         "outputDesc" : "Remark's creator"
+                    },
+                    {
+                        "outputName" : "location",
+                        "outputDesc" : "Where we encounter the remark"
+                    },
+                    {
+                        "outputName" : "dateCreation",
+                        "outputDesc" : "When we encounter the remark"
                     }
                 ]
             }
@@ -467,6 +491,10 @@ exports.index = (req,res) =>{
                 {
                     "inputName" : "token",
                     "inputDesc" : "your auth token"
+                },
+                {
+                    "inputName" : "location",
+                    "inputDesc" : "Where you encounter the remark"
                 }
             ],
             

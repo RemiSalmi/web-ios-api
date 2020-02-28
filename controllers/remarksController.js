@@ -21,9 +21,10 @@ exports.readAll = (req,res) =>{
 exports.create = (req,res) =>{
     const remark = req.body.remark
     const idCategory = req.body.idCategory
+    const location = req.body.location
     const idUser = jwt.decode(req.body.token).idUser
 
-    remarksModel.create(remark, idCategory, idUser)
+    remarksModel.create(remark, idCategory, idUser,location)
     .then(()=>{
         res.status(201).json({"message":"Success"})
     })
