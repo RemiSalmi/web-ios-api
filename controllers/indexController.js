@@ -559,7 +559,7 @@ exports.index = (req,res) =>{
         },
 
         {
-            "route" : "https://web-ios-api.herokuapp.com/answers/:idRemark",
+            "route" : "https://web-ios-api.herokuapp.com/remarks/:idRemark",
             "type" : "put",
             "desc" : "Update a Remark",
             "param" :
@@ -592,7 +592,7 @@ exports.index = (req,res) =>{
         },
 
         {
-            "route" : "https://web-ios-api.herokuapp.com/answers/:idRemark",
+            "route" : "https://web-ios-api.herokuapp.com/remarks/:idRemark",
             "type" : "delete",
             "desc" : "delete a remark",
             "param" :
@@ -836,7 +836,15 @@ exports.index = (req,res) =>{
             "output" :
             {
                 "message" : "Success | Error",
+                "data" :
+                [
+                    {
+                        "outputName" : "idAnswer",
+                        "outputDesc" : "created Answer's id"
+                    },
+                ]
             }
+            
         },
 
         {
