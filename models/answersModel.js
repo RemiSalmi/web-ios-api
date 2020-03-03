@@ -43,7 +43,7 @@ module.exports.readAll = () =>{
 
 module.exports.create = (answer, idCategory, idUser) =>{
     return new Promise(function (resolve, reject) {
-        pool.query('INSERT INTO "Answer" ("answer","idCategory","idUser") VALUES ($1, $2, $3);', [answer,idCategory,idUser], (err, res) => {
+        pool.query('INSERT INTO "Answer" ("answer","idCategory","idUser") VALUES ($1, $2, $3) RETURNING "idAnswer";', [answer,idCategory,idUser], (err, res) => {
             if (err) {
                 reject(err)
             } else {

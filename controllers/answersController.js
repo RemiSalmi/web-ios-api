@@ -23,8 +23,9 @@ exports.create = (req,res) =>{
     const idUser = jwt.decode(req.body.token).idUser
 
     answersModel.create(answer, idCategory, idUser)
-    .then(()=>{
-        res.status(201).json({"message":"Success"})
+    .then(queryRes =>{
+        let idAnswer = queryRes.rows[0]
+        res.status(201).json({"message":"Success", "data" : [{idAnswer}]})
     })
     .catch(err => {
         console.log(err)
