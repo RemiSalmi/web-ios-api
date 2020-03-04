@@ -25,7 +25,7 @@ exports.create = (req,res) =>{
     answersModel.create(answer, idCategory, idUser)
     .then(queryRes =>{
         let idAnswer = queryRes.rows[0]
-        res.status(201).json({"message":"Success", "data" : [{idAnswer}]})
+        res.status(201).json({"message":"Success", "data" : idAnswer})
     })
     .catch(err => {
         console.log(err)
@@ -77,7 +77,7 @@ exports.update = (req,res) =>{
 exports.getNbLikes = (req,res) =>{
     const idAnswer = parseInt(req.params.idAnswer)
 
-    
+
     likesModel.getNbLikes(idAnswer)
     .then(nbLike=>{
         res.status(200).json({"message":"Success","data" : nbLike})
@@ -86,7 +86,7 @@ exports.getNbLikes = (req,res) =>{
         console.log(err)
         res.status(400).json({"message" : "Error, not able to retrieve data from the database"})
     })
-    
+
 }
 
 exports.addLike = (req,res) =>{
@@ -119,7 +119,7 @@ exports.deleteLike = (req,res) =>{
 
 exports.addComment = (req,res) =>{
     const idAnswer = parseInt(req.params.idAnswer)
-    const comment = req.body.comment 
+    const comment = req.body.comment
     const idUser = jwt.decode(req.body.token).idUser
 
     commentsModel.addComment(idAnswer,comment,idUser)
