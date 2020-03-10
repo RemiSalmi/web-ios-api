@@ -32,7 +32,7 @@ module.exports.readAll = (req,res) =>{
 
 module.exports.create = (remark,idCategory,idUser,location) =>{
     return new Promise(function (resolve, reject) {
-        pool.query('INSERT INTO "Remark" ("remark","idCategory","idUser","location","dateCreation") VALUES ($1, $2, $3, $4, $5);', [remark,idCategory,idUser,location,new Date()], (err, res) => {
+        pool.query('INSERT INTO "Remark" ("remark","idCategory","idUser","location","dateCreation") VALUES ($1, $2, $3, $4, $5) RETURNING "idRemark";', [remark,idCategory,idUser,location,new Date()], (err, res) => {
             if (err) {
                 reject(err)
             } else {
@@ -101,7 +101,7 @@ module.exports.update = (idRemark, remark, idCategory) =>{
                 } else {
                     resolve(res)
                 }
-            }) 
+            })
         }else{
             pool.query('UPDATE "Remark" SET remark = $2, "idCategory" = $3 WHERE "idRemark" = $1', [idRemark,remark,idCategory], (err, res) => {
                 if (err) {
