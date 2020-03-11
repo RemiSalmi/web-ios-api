@@ -21,6 +21,19 @@ module.exports.encounter = (idRemark,idUser) =>{
     })
 }
 
+module.exports.getAllEncounters = () =>{
+    return new Promise(function (resolve, reject) {
+        pool.query('SELECT * FROM "Encounter"', (err, res) => {
+            if (err) {
+                reject(err)
+            } else {
+                let encounters = res.rows.map(encounter => new Encounter(encounter.idRemark,encounter.idUser))
+                resolve(encounters)
+            }
+        })
+    })
+}
+
 module.exports.deleteEncounter = (idRemark,idUser) =>{
     return new Promise(function (resolve, reject) {
         pool.query('DELETE FROM "Encounter" WHERE "idRemark" = $1 and "idUser" = $2', [idRemark,idUser], (err, res) => {

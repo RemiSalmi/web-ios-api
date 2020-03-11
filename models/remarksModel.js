@@ -13,6 +13,15 @@ class Remark {
 
 module.exports = Remark
 
+class Link {
+    constructor(idRemark, idAnswer) {
+        this.idRemark = idRemark;
+        this.idAnswer = idAnswer;
+    }
+}
+
+module.exports = Link
+
 
 module.exports.readAll = (req,res) =>{
     return new Promise(function (resolve, reject) {
@@ -24,6 +33,20 @@ module.exports.readAll = (req,res) =>{
                 let testDate = new Date(res.rows[5].dateCreation)
                 console.log(testDate.getFullYear())
                 resolve(remarks)
+
+            }
+        })
+    })
+}
+
+module.exports.getLinks = (req,res) =>{
+    return new Promise(function (resolve, reject) {
+        pool.query('SELECT * FROM "ListRA"', (err, res) => {
+            if (err) {
+                reject(err)
+            } else {
+                let links = res.rows.map(link => new Link(link.idRemark,link.idAnswer))
+                resolve(links)
 
             }
         })

@@ -18,6 +18,29 @@ exports.readAll = (req,res) =>{
     })
 }
 
+exports.getLinks = (req,res) =>{
+    remarksModel.getLinks()
+    .then(links =>{
+        res.status(200).json({"message":"Success","data" : links})
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(400).json({"message" : "Error, not able to retrieve remarks from the database"})
+    })
+}
+
+
+exports.getAllEncounters = (req,res) =>{
+    encountersModel.getAllEncounters()
+    .then(encounters =>{
+        res.status(200).json({"message":"Success","data" : encounters})
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(400).json({"message" : "Error, not able to retrieve remarks from the database"})
+    })
+}
+
 exports.create = (req,res) =>{
     const remark = req.body.remark
     const idCategory = req.body.idCategory
