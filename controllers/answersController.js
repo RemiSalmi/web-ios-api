@@ -17,6 +17,19 @@ exports.readAll = (req,res) =>{
     })
 }
 
+
+exports.getAllLikes = (req,res) =>{
+    likesModel.getAllLikes()
+    .then(likes =>{
+        res.status(200).json({"message":"Success","data" : likes})
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(400).json({"message" : "Error, not able to retrieve answers from the database"})
+    })
+}
+
+
 exports.create = (req,res) =>{
     const answer = req.body.answer
     const idCategory = req.body.idCategory

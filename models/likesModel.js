@@ -9,6 +9,20 @@ class Like {
 
 module.exports = Like
 
+
+module.exports.getAllLikes = () =>{
+    return new Promise(function (resolve, reject) {
+        pool.query('SELECT * FROM "Like"', (err, res) => {
+            if (err) {
+                reject(err)
+            } else {
+                let likes = res.rows.map(like => new Like(like.idAnswer,like.idUser))
+                resolve(likes)
+            }
+        })
+    })
+}
+
 module.exports.getNbLikes = (idAnswer) =>{
     return new Promise(function (resolve, reject) {
         pool.query('SELECT count(*) FROM "Like" WHERE "idAnswer" = $1', [idAnswer], (err, res) => {
