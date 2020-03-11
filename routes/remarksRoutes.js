@@ -16,6 +16,10 @@ router.get('/', remarksController.readAll)
 //Add a remark
 router.post('/', jsonParser,auth.isConnected, remarksController.create)
 
+router.get('/answers', remarksController.getLinks)
+
+router.get('/encounters', remarksController.getAllEncounters)
+
 //Get a remark by id
 router.get('/:idRemark', remarksController.read)
 
