@@ -16,6 +16,8 @@ router.get('/', answersController.readAll)
 //Create an answer
 router.post('/', jsonParser,auth.isConnected, answersController.create)
 
+router.get('/likes', answersController.getAllLikes)
+
 //Get an answer by id 
 router.get('/:idAnswer', answersController.read)
 

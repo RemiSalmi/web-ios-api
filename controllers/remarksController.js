@@ -18,6 +18,29 @@ exports.readAll = (req,res) =>{
     })
 }
 
+exports.getLinks = (req,res) =>{
+    remarksModel.getLinks()
+    .then(links =>{
+        res.status(200).json({"message":"Success","data" : links})
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(400).json({"message" : "Error, not able to retrieve remarks from the database"})
+    })
+}
+
+
+exports.getAllEncounters = (req,res) =>{
+    encountersModel.getAllEncounters()
+    .then(encounters =>{
+        res.status(200).json({"message":"Success","data" : encounters})
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(400).json({"message" : "Error, not able to retrieve remarks from the database"})
+    })
+}
+
 exports.create = (req,res) =>{
     const remark = req.body.remark
     const idCategory = req.body.idCategory
@@ -25,8 +48,9 @@ exports.create = (req,res) =>{
     const idUser = jwt.decode(req.body.token).idUser
 
     remarksModel.create(remark, idCategory, idUser,location)
-    .then(()=>{
-        res.status(201).json({"message":"Success"})
+    .then(queryRes =>{
+      let idRemark = queryRes.rows[0]
+        res.status(201).json({"message":"Success", "data" : idRemark})
     })
     .catch(err => {
         console.log(err)
@@ -85,7 +109,7 @@ exports.readAllAnswers = (req,res) =>{
         console.log(err)
         res.status(400).json({"message" : "Error, not able to retrieve answers from the database"})
     })
-    
+
 }
 
 exports.unlinkAnswer = (req,res) =>{
@@ -134,7 +158,7 @@ exports.encounter = (req,res) =>{
 exports.deleteEncounter = (req,res) =>{
     const idRemark = parseInt(req.params.idRemark)
     const idUser = jwt.decode(req.body.token).idUser
-    
+
     encountersModel.deleteEncounter(idRemark,idUser)
     .then(()=>{
         res.status(200).json({"message":"Success"})
@@ -147,7 +171,7 @@ exports.deleteEncounter = (req,res) =>{
 exports.getNbEncounter = (req,res) =>{
     const idRemark = parseInt(req.params.idRemark)
 
-    
+
     encountersModel.getNbEncounter(idRemark)
     .then(nbEncounter=>{
         res.status(200).json({"message":"Success","data" : nbEncounter})
@@ -169,5 +193,5 @@ exports.getRemarksByUser = (req,res) =>{
         console.log(err)
         res.status(400).json({"message" : "Error, not able to retrieve remarks from the database"})
     })
-    
+
 }

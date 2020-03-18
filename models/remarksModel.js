@@ -13,6 +13,15 @@ class Remark {
 
 module.exports = Remark
 
+class Link {
+    constructor(idRemark, idAnswer) {
+        this.idRemark = idRemark;
+        this.idAnswer = idAnswer;
+    }
+}
+
+module.exports = Link
+
 
 module.exports.readAll = (req,res) =>{
     return new Promise(function (resolve, reject) {
@@ -30,9 +39,23 @@ module.exports.readAll = (req,res) =>{
     })
 }
 
+module.exports.getLinks = (req,res) =>{
+    return new Promise(function (resolve, reject) {
+        pool.query('SELECT * FROM "ListRA"', (err, res) => {
+            if (err) {
+                reject(err)
+            } else {
+                let links = res.rows.map(link => new Link(link.idRemark,link.idAnswer))
+                resolve(links)
+
+            }
+        })
+    })
+}
+
 module.exports.create = (remark,idCategory,idUser,location) =>{
     return new Promise(function (resolve, reject) {
-        pool.query('INSERT INTO "Remark" ("remark","idCategory","idUser","location","dateCreation") VALUES ($1, $2, $3, $4, $5);', [remark,idCategory,idUser,location,new Date()], (err, res) => {
+        pool.query('INSERT INTO "Remark" ("remark","idCategory","idUser","location","dateCreation") VALUES ($1, $2, $3, $4, $5) RETURNING "idRemark";', [remark,idCategory,idUser,location,new Date()], (err, res) => {
             if (err) {
                 reject(err)
             } else {
@@ -101,7 +124,7 @@ module.exports.update = (idRemark, remark, idCategory) =>{
                 } else {
                     resolve(res)
                 }
-            }) 
+            })
         }else{
             pool.query('UPDATE "Remark" SET remark = $2, "idCategory" = $3 WHERE "idRemark" = $1', [idRemark,remark,idCategory], (err, res) => {
                 if (err) {
