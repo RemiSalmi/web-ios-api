@@ -118,7 +118,7 @@ exports.addLike = (req,res) =>{
 
 exports.deleteLike = (req,res) =>{
     const idAnswer = parseInt(req.params.idAnswer)
-    const idUser = jwt.decode(req.body.token).idUser
+    const idUser = jwt.decode(req.headers.authorization).idUser
 
     likesModel.deleteLike(idAnswer,idUser)
     .then(()=>{
