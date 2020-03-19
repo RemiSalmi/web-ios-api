@@ -30,8 +30,6 @@ module.exports.readAll = (req,res) =>{
                 reject(err)
             } else {
                 let remarks = res.rows.map(remark => new Remark(remark.idRemark,remark.remark,remark.idCategory,remark.idUser,remark.location,remark.dateCreation))
-                let testDate = new Date(res.rows[5].dateCreation)
-                console.log(testDate.getFullYear())
                 resolve(remarks)
 
             }
