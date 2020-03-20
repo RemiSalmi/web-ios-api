@@ -31,7 +31,7 @@ exports.create = (req,res) =>{
     .catch(err =>{
         res.status(400).json({"message" : "Error, not able to create an user in the database"})
     })
-    
+
 }
 
 exports.delete = (req,res) =>{
@@ -59,10 +59,11 @@ exports.read = (req,res) =>{
 }
 
 exports.update = (req,res) =>{
-    const idUser = parseInt(req.params.idUser)
+    const idUser = jwt.decode(req.body.token).idUser
     const password = req.body.password
+    const encryptedPass = bcrypt.hashSync(password, 10)
 
-    usersModel.update(idUser, password)
+    usersModel.update(idUser, encryptedPass)
     .then(() =>{
         res.status(200).json({"message":"Success"})
     })
@@ -75,7 +76,7 @@ exports.update = (req,res) =>{
 exports.login = (req,res) =>{
     const pseudo = req.body.pseudo
     const password = req.body.password
-    
+
     usersModel.getUserByPseudo(pseudo)
     .then(reqRes =>{
 
@@ -86,11 +87,11 @@ exports.login = (req,res) =>{
             }else{
                 res.status(401).json({"message" : "Error, bad password"})
             }
-            
+
         }else{
             res.status(401).json({"message" : "Error, bad user"})
         }
-        
+
     })
     .catch(err =>{
         res.status(400).json({"message" : "Error, not able to retrieve data from the database"})

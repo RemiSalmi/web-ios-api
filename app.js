@@ -42,4 +42,3 @@ const indexController = require('./controllers/indexController');
 
 //Index route
 app.get('/', indexController.index);
-
