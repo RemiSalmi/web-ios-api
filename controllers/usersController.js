@@ -25,8 +25,9 @@ exports.create = (req,res) =>{
     const encryptedPass = bcrypt.hashSync(password, 10)
 
     usersModel.create(pseudo,encryptedPass)
-    .then(() =>{
-        res.status(201).json({"message":"Success"})
+    .then(queryRes =>{
+        let idUser = queryRes.rows[0]
+        res.status(201).json({"message":"Success","data":idUser})
     })
     .catch(err =>{
         res.status(400).json({"message" : "Error, not able to create an user in the database"})

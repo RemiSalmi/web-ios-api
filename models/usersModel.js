@@ -27,7 +27,7 @@ module.exports.readAll = () => {
 module.exports.create = (pseudo,password) =>{
 
     return new Promise(function (resolve, reject) {
-        pool.query('INSERT INTO "User" ("pseudo","password","role") VALUES ($1, $2, $3);', [pseudo,password,"user"], (err, res) => {
+        pool.query('INSERT INTO "User" ("pseudo","password","role") VALUES ($1, $2, $3) RETURNING "idUser";', [pseudo,password,"user"], (err, res) => {
             if (err) {
                 reject(err)
             } else {
@@ -35,7 +35,7 @@ module.exports.create = (pseudo,password) =>{
             }
         })
     })
-    
+
 
 }
 
