@@ -60,7 +60,8 @@ exports.read = (req,res) =>{
 }
 
 exports.update = (req,res) =>{
-    const idUser = jwt.decode(req.body.token).idUser
+    const idUser = parseInt(req.params.idUser)
+    //const idUser = jwt.decode(req.body.token).idUser
     const password = req.body.password
     const encryptedPass = bcrypt.hashSync(password, 10)
 
