@@ -23,7 +23,7 @@ router.get('/remarks', categoryController.readAllRemark)
 router.get('/:idCategory', categoryController.read)
 
 //Add a category
-router.get('/', jsonParser,  auth.isConnected, categoryController.create)
+router.post('/', jsonParser,  auth.isConnected, categoryController.create)
 
 //Update a category by his id
 router.put('/:idCategory', jsonParser,  auth.isConnected, categoryController.update)
