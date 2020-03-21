@@ -77,6 +77,18 @@ module.exports.update = (idUser,password) =>{
     })
 }
 
+module.exports.updateRole = (idUser,role) =>{
+    return new Promise(function (resolve, reject) {
+        pool.query('UPDATE "User" SET role = $2 WHERE "idUser" = $1', [idUser,role], (err, res) => {
+            if (err) {
+                reject(err)
+            } else {
+                resolve(res)
+            }
+        })
+    })
+}
+
 module.exports.getUserByPseudo = (pseudo) =>{
     return new Promise(function (resolve, reject) {
         pool.query('SELECT * FROM "User" WHERE "pseudo" = $1', [pseudo], (err, res) => {

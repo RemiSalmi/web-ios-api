@@ -75,6 +75,25 @@ exports.update = (req,res) =>{
 
 }
 
+
+exports.updateRole = (req,res) =>{
+    const idUser = parseInt(req.params.idUser)
+    const role = req.body.role
+
+    usersModel.updateRole(idUser, role)
+    .then(() =>{
+        res.status(200).json({"message":"Success"})
+    })
+    .catch(err =>{
+        res.status(400).json({"message" : "Error, not able to update the user in the database"})
+    })
+
+}
+
+
+
+
+
 exports.login = (req,res) =>{
     const pseudo = req.body.pseudo
     const password = req.body.password
