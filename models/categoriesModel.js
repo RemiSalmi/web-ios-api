@@ -65,3 +65,39 @@ module.exports.read = (idCategory) =>{
         })
     })
 }
+
+module.exports.create = (lib,type) =>{
+    return new Promise(function (resolve, reject) {
+        pool.query('INSERT INTO "Category" ("lib","type") VALUES ($1, $2) RETURNING "idCategory";', [lib,type], (err, res) => {
+            if (err) {
+                reject(err)
+            } else {
+                resolve(res)
+            }
+        })
+    })
+}
+
+module.exports.update = (idCategory,lib,type) =>{
+    return new Promise(function (resolve, reject) {
+        pool.query('UPDATE "Category" SET lib = $2, type = $3 WHERE "idCategory" = $1', [idCategory,lib,type], (err, res) => {
+            if (err) {
+                reject(err)
+            } else {
+                resolve(res)
+            }
+        })
+    })
+}
+
+module.exports.delete = (idCategory) =>{
+    return new Promise(function (resolve, reject) {
+        pool.query('DELETE FROM "Category" WHERE "idCategory" = $1', [idCategory], (err, res) => {
+            if (err) {
+                reject(err)
+            } else {
+                resolve(res)
+            }
+        })
+    })
+}
