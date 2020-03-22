@@ -157,7 +157,12 @@ exports.encounter = (req,res) =>{
 
 exports.deleteEncounter = (req,res) =>{
     const idRemark = parseInt(req.params.idRemark)
-    const idUser = jwt.decode(req.headers.authorization).idUser
+    const idUser = 0
+    if(req.headers.authorization){
+      idUser = jwt.decode(req.headers.authorization).idUser
+    }else{
+      idUser = jwt.decode(req.body.token).idUser
+    }
 
     encountersModel.deleteEncounter(idRemark,idUser)
     .then(()=>{
