@@ -157,7 +157,7 @@ exports.encounter = (req,res) =>{
 
 exports.deleteEncounter = (req,res) =>{
     const idRemark = parseInt(req.params.idRemark)
-    const idUser = 0
+    var idUser = 0
     if(req.headers.authorization){
       idUser = jwt.decode(req.headers.authorization).idUser
     }else{
